@@ -31,6 +31,13 @@
 				<section class="col-12 col-lg-7" role="contentinfo" aria-label="Products information">
 					<!-- header template -->
 					[%load_ajax_template id:'_header' type:'item' template:'header' preload:'1' tmpl_sku:'[@current_sku@]' tmpl_preview:'y'/%]
+					<div class="row mt-3">
+						[%if [@misc2@]%]
+						<div class="col-12 col-sm-6">
+                          <p><i class="fa fa-truck fa-fw mr-2"></i> Free Shipping Anywhere In The Galaxy</p>
+						</div>
+						[%/if%]
+					</div>
 					<!-- child_products template -->
 					[%load_template file:"products/includes/child_products.template.html"/%]
 					[%if [@has_variation@] || ![@has_child@] AND ![@has_components@]%]
@@ -43,7 +50,11 @@
 					[%/if%]
 				</section>
 			</div>
-
+            <div class="col-12">
+				[%if [@origin_country@] eq 'UZ'%]
+                   <p>Genuine Uzbek Products!</p>
+				[%/if%]
+			</div>
 			<div class="row mt-4">
 				[%discount_products id:'[@SKU@]' template:'' show_all:'1' limit:'100'%]
 					[%param header%]

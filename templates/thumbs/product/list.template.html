@@ -7,13 +7,14 @@
 				<div class="row">
 					<div class="col-4 col-md-3">
 						<a href="[@URL@]" class="thumbnail-image">
-							<img src="[%asset_url type:'product' thumb:'thumb' id:'[@sku@]'%][%param default%][%cdn_asset html:'0' library:'images'%]default_product.gif[%/cdn_asset%][%/param%][%/asset_url%]" itemprop="image" class="product-image img-fluid" alt="[@model@]" rel="itmimg[@sku@]">
+							<img src="[%asset_url type:'product' thumb:'thumb' default:'/assets/default_product.gif' id:'[@sku@]'%][%/asset_url%]" itemprop="image" class="product-image img-fluid" alt="[@model@]" rel="itmimg[@sku@]">
 						</a>
 					</div>
 					<div class="col-8 col-md-6">
 						<h3 itemprop="name"><a href="[@URL@]" title="[@model@]">[%format type:'text' maxlength:'100' rmhtml:'1'%][@model@][%/format%]</a></h3>
 						<p itemprop="description">[@short_description@]</p>
 					</div>
+					[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]
 					<div class="col-12 col-md-3 text-right">
 						<div class="price lead" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 							<meta itemprop="priceCurrency" content="[@config:defaultcurrency@]">
@@ -31,14 +32,19 @@
 							[%if [@save@] > 0 AND ![@has_child@] %]
 								<p class="mb-1"><span class="badge badge-warning">[%format type:'percent'%][@save@][%/format%] OFF</span></p>
 							[%/if%]
-							[%if [@save@] > 0%]
+							[%if [@save@] > 0 AND [@store_quantity@] > 1%]
 								<p class="mb-1"><span class="badge badge-secondary">RRP [%format type:'currency'%][@retail@][%/format%]</span></p>
+							[%/if%]
+							[%if [@store_quantity@] < 1 %]
+							<p class="mb-1"><span class="badge badge-secondary">Out Of Stock</span></p>
 							[%/if%]
 						</div>
 						[%if [@form:disable_scripts@] ne 'true'%][%tracking_code type:'Thumbnails' /%][%/if%]
 					</div>
+					[%/if%]
 				</div>
 			</div>
+			[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]
 			<div class="card-footer">
 				<form class="form-inline buying-options float-right">
 					<input type="hidden" id="sku[@rndm@][@sku@]" name="sku[@rndm@][@sku@]" value="[@sku@]">
@@ -59,7 +65,9 @@
 						<a class="notify_popup btn btn-outline-secondary btn-loads" href="[@url@]" title="Notify Me When Back In Stock" data-loading-text="<i class='fa fa-spinner fa-spin' style='font-size: 14px'></i>">Out Of Stock</a>
 					[%/if%]
 				</form>
-			</div>
+			</div>[%else%]
+             <a class="btn btn-primary btn-block mt-3" href="[%url page:'account' type:'login'/%]">Login for Pricing</a>
+            [%/if%]
 		</div>
 	</article>
 [%/cache%]

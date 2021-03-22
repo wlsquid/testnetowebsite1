@@ -103,10 +103,10 @@
 						<table class="table table-bordered" cellspacing="0">
 							<thead>
 								<tr>
-									<th width="1">Quantity</th>
+									[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]<th width="1">Quantity</th>[%/if%]
 									<th width="72">Image</th>
 									<th>Name</th>
-									<th width="47">Price</th>
+									[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]<th width="47">Price</th>[%/if%]
 								</tr>
 							</thead>
 							<tbody>
@@ -162,10 +162,13 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="cta-area">
+					[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]<div class="cta-area">
 						<a href="#" rel="nofollow" class="multi-add btn btn-success" title="Add [@model@] to Cart"><i class="fa fa-shopping-cart"></i> Add Selected to Cart</a>
 						<span id="a2c_loading"></span>
 					</div>
+					[%else%]
+    <a class="btn btn-primary btn-block mt-3" href="[%url page:'account' type:'login'/%]">Login for Pricing</a>
+[%/if%]
 				</div>
 			[%/ PARAM%]
 		[%/ DISPLAY_CHILD_PRODUCTS%]

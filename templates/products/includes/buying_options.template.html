@@ -1,3 +1,4 @@
+[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]
 <div class="extra-options">
 	[%multilevelpricing id:'[@SKU@]'%]
 		[%param *header%]
@@ -184,3 +185,6 @@
 		</div>
 	</div>
 </div>
+[%else%]
+    <a class="btn btn-primary btn-block mt-3" href="[%url page:'account' type:'login'/%]">Login for Pricing</a>
+[%/if%]

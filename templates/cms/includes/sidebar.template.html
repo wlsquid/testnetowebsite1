@@ -44,7 +44,7 @@
 							[%/if%]
 						[%/param%]
 					[%/product_filter%]
-					[%product_filter type:'instock' autohide:'0'%]
+					[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%][%product_filter type:'instock' autohide:'0'%]
 						[%param header%]
 							<div class="list-group-item filter-title"><h3 class="h4 mb-0">Filter By Stock</h3></div>
 						[%/param%]
@@ -120,7 +120,7 @@
 								</form>
 							</div>
 						[%/param%]
-					[%/product_filter%]
+					[%/product_filter%][%/if%]
 					[%product_filter type:'brand' autohide:'0'%]
 						[%param header%]
 							<div class="list-group-item filter-title"><h3 class="h4 mb-0">Filter By Brand</h3></div>

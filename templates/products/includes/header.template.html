@@ -27,6 +27,7 @@
 			</ul>
 		</div>
 	</div>
+	[%if [@user:group_id@] ne [@CONFIG:DEFAULT_GROUPID@]%]
 	[%if ![@has_child@] || [@has_variation@]%]
 		<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="wrapper-pricing col-sm-4">
 			<link itemprop="url" href="[@url@]"/>
@@ -68,6 +69,7 @@
 				</div>
 			[%/if%]
 			[%if [@form:disable_scripts@] ne 'true'%]
+			
 			[%tracking_code type:'BuyingOptions' /%]
 			[%/if%]
 			[%if [@available_preorder_quantity@] > 0 AND [@preorder@] AND [@config:WEBSTORE_USE_PREORDER_QUANTITY@]%]
@@ -88,4 +90,7 @@
 			[%/if%]
 		</div>
 	[%/if%]
+	[%else%]
+    <a class="btn btn-primary btn-block mt-3" href="[%url page:'account' type:'login'/%]">Login for Pricing</a>
+[%/if%]
 </div>
